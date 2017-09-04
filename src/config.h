@@ -23,7 +23,7 @@
 // Settings for SD card
 #define SD_MODE         ENABLE
 // GPIO Pin where SD Module CS is connected
-#define SD_READER_PIN   4
+#define SD_READER_PIN   15
 
 // Interval waited until switch listening to next channel
 #define CHANNEL_HOP_INTERVAL_MS 1000

@@ -4,6 +4,8 @@ extern "C" {
 #include <queue>
 #include <time.h>
 #include <SPI.h>
+#include <Wire.h>
+#include <RtcDS3231.h>
 #include "SdFat.h"
 #include "ESP8266WiFi.h"
 
@@ -12,6 +14,10 @@ extern "C" {
 #include "Report/Report.h"
 #include "Probe/Probe.h"
 #include "PacketParser/PacketParser.h"
+#include "RtcModule/RtcModule.h"
+
+
+// Putting macro values into variables
 
 bool sdMode  = SD_MODE;
 bool httpPostMode = HTTP_POST_MODE;
@@ -23,6 +29,8 @@ const char* exclusiveMacTarget = EXCLUSIVE_MAC_TARGET;
 bool printProbeEnable = PRINT_PROBES;
 bool setTime = SET_TIME_NTP;
 
+// Variable declarations
+
 SdFat SD;
 
 std::queue<Probe> probeQueue;
@@ -32,6 +40,8 @@ bool isSendingReport = false;
 
 uint8_t beaconMac[6];
 char beaconMacString[18];
+
+// Higher Level Functions
 
 void connectAcessPoint() {
   WiFi.begin(ssid, password);
@@ -147,10 +157,12 @@ void setup() {
 		now = time(nullptr);
 		Serial.print("Datetime: ");
 		Serial.println(ctime(&now));
-	}
 
+		SetRtcTime(now);
+	}
 	else {
-		Serial.println("Time setting disabled.");
+		Serial.println("Getting time from module...");
+		now = GetTimeFromRtc();
 		Serial.print("Datetime: ");
 		Serial.println(ctime(&now));
 	}
