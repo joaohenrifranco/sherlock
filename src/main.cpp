@@ -27,7 +27,6 @@ int timezone = TIMEZONE;
 const bool exclusiveMacMode  = EXCLUSIVE_MAC_MODE;
 const char* exclusiveMacTarget = EXCLUSIVE_MAC_TARGET;
 bool printProbeEnable = PRINT_PROBES;
-bool setTime = SET_TIME_NTP;
 
 // Variable declarations
 
@@ -37,6 +36,7 @@ std::queue<Probe> probeQueue;
 
 time_t lastSent;
 bool isSendingReport = false;
+bool setTime = false;
 
 uint8_t beaconMac[6];
 char beaconMacString[18];
@@ -82,6 +82,27 @@ void WriteProbeToFile(Probe probe)
 			Serial.println("Error opening file, writing to SD Card disabled");
 		}
 }
+
+bool IsSsidInRange(String setupSsid) {
+	int n = WiFi.scanNetworks();
+	Serial.println("Scanning networks...");
+	
+	if (n == 0) {
+		Serial.println("No networks found.");
+		return false;
+	}
+	else {
+		Serial.print(n);
+		Serial.println(" networks found.");
+		for (int i = 0; i < n; ++i) {
+			if (WiFi.SSID(i) == setupSsid) {
+			Serial.println("Setup network " + setupSsid + "found!");
+			return true;
+			}
+		}
+	}
+	return false;
+ }
 
 // Callback for promiscuous mode
 static void ICACHE_FLASH_ATTR snifferCallback(uint8_t *buffer, uint16_t length) {
@@ -140,6 +161,11 @@ void setup() {
 		Serial.println("SD card disabled.");
 
 	time_t now = 0;
+
+	if (IsSsidInRange(ssid))
+		setTime = true;
+	else
+		httpPostMode = false;
 
   // Connect to defined network
   if (setTime) {

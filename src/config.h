@@ -16,8 +16,6 @@
 #define EXCLUSIVE_MAC_MODE   DISABLE
 #define EXCLUSIVE_MAC_TARGET "00:00:00:00:00:00"
 
-#define SET_TIME_NTP ENABLE
-
 #define HTTP_POST_MODE  ENABLE
 
 // Settings for SD card
