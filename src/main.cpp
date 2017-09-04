@@ -210,7 +210,7 @@ void setup() {
 
 void loop() {
 	
-	if (httpPostMode = ENABLE) {
+	if (httpPostMode == ENABLE) {
 		
 		if (probeQueue.size() > MAX_QUEUE_SIZE || time(nullptr) - lastSent > BUFFER_TIMEOUT) {
 		Serial.printf("Connection with server triggered: ");
