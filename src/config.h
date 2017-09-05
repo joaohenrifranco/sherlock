@@ -6,8 +6,8 @@
 
 // Internet connection settings
 // Used in time setting and data http posting to server
-#define AP_SSID     "test"
-#define AP_PASSWORD "doublerainbow"
+#define AP_SSID     "Franco Guest"
+#define AP_PASSWORD "convidad@"
 
 // Timezone setting
 #define TIMEZONE -3
@@ -21,7 +21,9 @@
 // Settings for SD card
 #define SD_MODE         ENABLE
 // GPIO Pin where SD Module CS is connected
-#define SD_READER_PIN   15
+#define SD_READER_PIN   0
+
+#define MAX_FILE_SIZE 1024*1024*100
 
 // Interval waited until switch listening to next channel
 #define CHANNEL_HOP_INTERVAL_MS 1000
