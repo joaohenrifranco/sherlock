@@ -41,7 +41,7 @@ struct RxControl {
 	unsigned channel:4; //which channel this packet in.
 	unsigned:12;
 };
-   
+	 
 struct SnifferPacket {
 	struct RxControl rx_ctrl;
 	uint8_t data[DATA_LENGTH];

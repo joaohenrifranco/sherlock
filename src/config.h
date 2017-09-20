@@ -6,8 +6,8 @@
 
 // Internet connection settings
 // Used in time setting and data http posting to server
-#define AP_SSID     "Franco Guest"
-#define AP_PASSWORD "convidad@"
+#define AP_SSID     "test"
+#define AP_PASSWORD "doublerainbow"
 
 // Timezone setting
 #define TIMEZONE -3

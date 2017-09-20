@@ -5,11 +5,11 @@
 
 void getDataSpan(uint16_t start, uint16_t size, uint8_t* data, char dataSpan[]) {
 	dataSpan[0] = '\0';
-  for(uint16_t i = start; i < DATA_LENGTH && i < start+size; i++) {
-  	sprintf(dataSpan, "%s%c", dataSpan, data[i]);
-  }
+	for(uint16_t i = start; i < DATA_LENGTH && i < start+size; i++) {
+		sprintf(dataSpan, "%s%c", dataSpan, data[i]);
+	}
 }
-  
+	
 void getMac(char *addr, uint8_t* data, uint16_t offset) {
 	sprintf(addr, "%02x:%02x:%02x:%02x:%02x:%02x", data[offset+0], data[offset+1], data[offset+2], data[offset+3], data[offset+4], data[offset+5]);
 }

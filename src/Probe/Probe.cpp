@@ -4,13 +4,13 @@ Probe::Probe(){}
 
 void Probe::setRssi(int newRssi)
 {
-  rssi = newRssi;
+	rssi = newRssi;
 }
 void Probe::setChannel(int newChannel)
 {
-  channel = newChannel;
+	channel = newChannel;
 }
 void Probe::setCapturedAt(time_t newCapturedAt)
 {
-  capturedAt = newCapturedAt;
+	capturedAt = newCapturedAt;
 }

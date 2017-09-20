@@ -1,5 +1,5 @@
 extern "C" {
-  #include <user_interface.h>
+	#include <user_interface.h>
 }
 #include <queue>
 #include <time.h>
@@ -48,7 +48,7 @@ void PrintProbe(Probe probe, int queueSize) {
 	Serial.print(queueSize);
 
 	Serial.printf(") RSSI: %d - Ch: %d - dstMac: %s - srcMac: %s - bssidMac: %s - SSID: %s\n", 
-	                  probe.rssi, probe.channel, probe.dstMac, probe.srcMac, probe.bssidMac, probe.ssid);
+										probe.rssi, probe.channel, probe.dstMac, probe.srcMac, probe.bssidMac, probe.ssid);
 }
 
 void OpenAvailableFile() {
@@ -80,9 +80,9 @@ void WriteProbeToFile(Probe probe) {
 			
 	if (probesFile) {
 			probesFile.printf("%d;%d;%s;%s;%s;%s;%d\r\n", 
-							  probe.rssi, probe.channel, probe.dstMac, 
-							  probe.srcMac, probe.bssidMac, probe.ssid,
-							  probe.capturedAt);
+								probe.rssi, probe.channel, probe.dstMac, 
+								probe.srcMac, probe.bssidMac, probe.ssid,
+								probe.capturedAt);
 			probesFile.flush();
 			fileSizeCounter += 128;
 			Serial.println("SD CARD: Written to SD!");
@@ -167,17 +167,17 @@ void ConnectAcessPoint() {
 	WiFi.begin(ssid, password);
 	Serial.printf("STATION MODE: Connecting to \"%s\"", ssid);
 	while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
+		delay(500);
+		Serial.print(".");
+	}
 	Serial.printf("\n");
-  Serial.printf("STATION MODE: Connected. IP address: ");
-  Serial.print(WiFi.localIP());
-  Serial.printf("\n");
+	Serial.printf("STATION MODE: Connected. IP address: ");
+	Serial.print(WiFi.localIP());
+	Serial.printf("\n");
 }
 
 void setup() {
-  Serial.begin(115200);
+	Serial.begin(115200);
 	Serial.println("");
 	
 	// Getting beacon MAC
@@ -186,17 +186,17 @@ void setup() {
 	
 	Serial.printf("BEACON MAC: %s\n", beaconMacString);
 
-  // SD Card setup
-  if (sdMode == ENABLE) {
-    Serial.println("SD CARD: Initializing...");
-    if (!SD.begin(SD_READER_PIN)) {
-      Serial.println("SD CARD: Initialization failed! No data will be recorded.");
-      sdMode = DISABLE;
-    }
-    else {
+	// SD Card setup
+	if (sdMode == ENABLE) {
+		Serial.println("SD CARD: Initializing...");
+		if (!SD.begin(SD_READER_PIN)) {
+			Serial.println("SD CARD: Initialization failed! No data will be recorded.");
+			sdMode = DISABLE;
+		}
+		else {
 			Serial.println("SD CARD: Initialization successful!");
 			OpenAvailableFile();
-    }
+		}
 	}
 	else
 		Serial.println("SD CARD: Disabled.");
@@ -209,7 +209,7 @@ void setup() {
 
 	// Time setup
 	time_t now;
-  if (getTimeFromNtp) {
+	if (getTimeFromNtp) {
 		ConnectAcessPoint();
 		configTime(timezone * 3600, 0, "pool.ntp.org", "a.ntp.br");
 		Serial.print("TIME SETTING: Retrieving time info from NTP server");
